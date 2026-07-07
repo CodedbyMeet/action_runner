@@ -13,13 +13,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Debug
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2
+
       - name: Deploy Website
         run: |
           sudo rsync -av --delete \
             --exclude='.git' \
             --exclude='.github' \
-            ./Twitter/ /var/www/html/
+            ./spotify/ /var/www/html/
 
-      - name: Restart Apache2
+      - name: Restart Nginx
         run: |
-          sudo systemctl restart apache2
+          sudo systemctl restart nginx
